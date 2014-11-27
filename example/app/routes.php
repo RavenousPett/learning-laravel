@@ -29,6 +29,7 @@ Route::get('/users/{username}', function($username){
 
 Route::get('/oop', function(){
 
+	#A basic class
 	class Task{
 
 		public $title;
@@ -55,10 +56,12 @@ Route::get('/oop', function(){
 	// var_dump($task->completed);
 	// return $task->title . " - " . $task->description . " Completed = " . $task->completed;
 
+
+	#Getters and setters
 	class Person{
 
-		public $name;
-		public $age;
+		private $name;
+		private $age;
 
 		public function __construct($name){
 
@@ -70,7 +73,7 @@ Route::get('/oop', function(){
 
 			if( $age < 18){
 
-				echo "Person is too young";
+				throw new Exception("Person is too young");
 
 			}else{
 
@@ -90,17 +93,52 @@ Route::get('/oop', function(){
 
 	$rich = new Person('Richard Pett');
 
-	// Manipulating the propterty directly
+	// Manipulating the propterty directly, wont work now as it is private not public. Use the public interface that we offer to you, i.e. getAge and setAge.
 	// $rich->age = 12;
 
 	// We should use setters so that we can set rules about how the property should be set
-	$rich->setAge(19);
+	// $rich->setAge(19);
 
 	// We can also use getters to specify behavior when we get the age. E.g. return the age in number of days	
-	var_dump($rich->getAge());
-
-
+	// var_dump($rich->getAge());
 	// var_dump($rich);
+
+
+	// Encapsulation, only expose the methods and behaviour that a relevant to the public interface. We want to hide as much information as possible.
+	class LightSwitch{
+
+		// public, i.e. available outside of this class. On and Off are all that the public needs to be aware of.
+		public function on(){
+
+
+		}
+
+		public function off(){
+
+
+		}
+
+		// Other functions that are required to turn the swtich on, but are not publcicly accessible.
+		private function connect(){
+
+			echo "connecting";
+
+		}
+
+		// Can also do protect funtion activate()
+		private function activate(){
+
+
+		}
+
+	}
+
+	// $switch = new LightSwitch();
+	// Will throw and error because we are calling a private method from outside the class
+	// $switch->connect();
+
+	// private = accessed only and exclusively from within the LightSwtich class
+	// protected = can be accessed from a class that extends LightSwitch
 
 
 });
