@@ -17,15 +17,9 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/files', 'PagesController@files');
 
-Route::get('/users', 'PagesController@users');
+Route::get('/users', 'UsersController@index');
 
-Route::get('/users/{username}', function($username){
-
-	$user = User::whereUsername($username)->first();
-
-	return View::make('users/show')->with('user', $user);
-
-});
+Route::get('/users/{username}', 'UsersController@show');
 
 Route::get('/oop', function(){
 

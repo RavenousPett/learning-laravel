@@ -29,12 +29,4 @@ class PagesController extends BaseController{
 	
 	}
 
-
-	public function users(){
-
-		$users = User::all();
-		
-		return View::make('users/index', ['users' => $users]);
-	
-	}
 }
