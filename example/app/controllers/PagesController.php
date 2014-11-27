@@ -3,7 +3,13 @@
 class PagesController extends BaseController{
 	
 	public function home(){
-	
+		
+		// handy function to add a user to DB
+		// User::create([
+		//  	'username' => 'StevieG',
+		//  	'password' => Hash::make('password')
+		// ]);
+
 		$name = 'Ricahrd';
 		return View::make('hello')->with('name', $name);
 	

@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-		<title>Title of the document</title>
-	</head>
+@extends('layouts/default')
+@section('content')
+	<h1>All Users</h1>
 
-	<body>
+	{{-- This is a comment dd($users->toArray()) --}}
 
-		<h1>All Users</h1>
+	<ul>
+	@if($users->count()) 
 
-		{{-- This is a comment dd($users->toArray()) --}}
+		@foreach($users as $user)
 
-		<ul>
-		@if($users->count()) 
-		
-			@foreach($users as $user)
+			<?php /* <li>{{ $user->username }}</li> */ ?>
 
-				<?php /* <li>{{ $user->username }}</li> */ ?>
+			<li>{{ link_to("/users/{$user->username}", $user->username) }}</li>
 
-				<li>{{ link_to("/users/{$user->username}", $user->username) }}</li>
+		@endforeach
 
-			@endforeach
+	@else
 
-		@else
+		<p>No users</p>
 
-			<p>No users</p>
-
-		@endif
-		</ul>
-
-	</body>
-
-</html>
+	@endif
+@stop

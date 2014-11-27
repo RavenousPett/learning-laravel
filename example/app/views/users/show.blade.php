@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-		<title>Title of the document</title>
-	</head>
+@extends('layouts/default')
+@section('content')
 
-	<body>
+	<h1>Hello {{ $user->username }}</h1>
 
-		<h1>Hello {{ $user->username }}</h1>
-
-
-	</body>
-
-</html>
+@stop
