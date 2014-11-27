@@ -22,4 +22,13 @@ class PagesController extends BaseController{
 		return View::make('files')->with('assets', $assets);
 	
 	}
+
+
+	public function users(){
+
+		$users = User::all();
+		
+		return View::make('users/index', ['users' => $users]);
+	
+	}
 }
