@@ -17,9 +17,12 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/files', 'PagesController@files');
 
-Route::get('/users', 'UsersController@index');
-
-Route::get('/users/{username}', 'UsersController@show');
+// Resouceful routing for users section for a RESTful style of development. This is because we are accessing or manipulating a resourcre (Users).
+// REST allows us to think of our URIs in terms of nouns and collections
+// Route::get('/users', 'UsersController@index');
+// Route::get('/users/{username}', 'UsersController@show');
+Route::resource('users', 'UsersController');
+// Tip! - always favour convention over cofiguration
 
 Route::get('/oop', function(){
 

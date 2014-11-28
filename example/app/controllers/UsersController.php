@@ -17,4 +17,10 @@ class UsersController extends BaseController{
 		return View::make('users/show')->with('user', $user);
 	}
 
+	public function create(){
+
+		echo "Show form to create user";
+
+	}
+
 }
