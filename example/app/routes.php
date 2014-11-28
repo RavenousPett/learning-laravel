@@ -85,7 +85,7 @@ Route::get('/oop', function(){
 
 	}
 
-	$rich = new Person('Richard Pett');
+	// $rich = new Person('Richard Pett');
 
 	// Manipulating the propterty directly, wont work now as it is private not public. Use the public interface that we offer to you, i.e. getAge and setAge.
 	// $rich->age = 12;
@@ -133,6 +133,99 @@ Route::get('/oop', function(){
 
 	// private = accessed only and exclusively from within the LightSwtich class
 	// protected = can be accessed from a class that extends LightSwitch
+
+	// Inheritance, sub (aka child) classes inherit behaviour from the base (aka parent) class.
+	// We create a sub class by extending another class. The protected funtions and properties in the base class will be available 
+	// in the sub class
+	abstract class Shape{
+		// This is now an abscrate class. I specify comon functionality here but I never want to be directly instanciated. You 
+		// cant just have a generic shape object, you must use one of the sub classes i.e. Circle, Square or Traingle.
+		// We want to enforce the contract that every shape must have a getArea method. Now that it is an absract class an error
+		// will be thrown if we try and create a generic Shape, i.e. new Shape; Same principle for abstract methods, e.g. getArea
+
+		protected $colour;
+
+		public function __construct($colour = 'red'){
+
+			$this->colour = $colour;
+		}
+
+		protected function getColour(){
+
+			return $this->colour;
+
+		}
+
+		// any sub class MUST provide the method body, else a fatal error is thrown
+		abstract function getArea();
+
+	}
+
+	class Square extends Shape{
+
+		protected $length = 4; 
+
+		// if the behavior of a method is usualy this, but sometimes that, include it in the base class
+		public function getArea(){
+
+			// return $this->length * $this->length;
+			// squared, is the same as using to the power of 2, below
+			return pow($this->length, 2);
+
+		}
+
+	}
+
+	class Triangle extends Shape{
+
+		protected $base = 4;
+		protected $height = 7;
+
+		// when we want to overide the behavior of a method include it in the sub class, it will get called instead
+		public function getArea(){
+
+			// in the case of a triangl we get the are by multiplying half base by the height
+			return .5 * $this->base * $this->height;
+
+		}
+
+	}
+
+	class Circle extends Shape{
+
+		protected $radius = 5;
+
+		public function getArea(){
+
+			// all pretty much the same
+			// return 3.14 * pow($this->radius, 2);
+			// return pi() * pow($this->radius, 2);
+			return M_PI * pow($this->radius, 2);
+
+		}
+
+		public function getCircleColour(){
+
+			return $this->getColour();
+
+		}
+
+
+	}
+
+	// echo (new Shape)->getArea();
+	// echo (new Square)->getArea();
+	// echo (new Square)->getArea();
+	// echo (new Circle)->getArea();
+	// new Shape;
+	// new Circle;
+	// echo (new Circle('green'))->getColour();
+	// echo (new Circle)->getColour();
+	// echo (new Circle)->getArea();
+	$circle = new Circle;
+	echo $circle->getCircleColour();
+
+
 
 
 });
