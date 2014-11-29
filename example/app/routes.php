@@ -268,7 +268,6 @@ Route::get('/oop', function(){
 
 		}
 
-
 	}
 
 	class Staff{
@@ -293,7 +292,6 @@ Route::get('/oop', function(){
 			$this->members[] = $human;
 
 		}
-
 
 	}
 
