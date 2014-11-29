@@ -225,10 +225,92 @@ Route::get('/oop', function(){
 	// echo (new Circle('green'))->getColour();
 	// echo (new Circle)->getColour();
 	// echo (new Circle)->getArea();
-	$circle = new Circle;
-	echo $circle->getCircleColour();
+	// $circle = new Circle;
+	// echo $circle->getCircleColour();
+
+	// Messages, objects interact with one another by sending message. This example also demonstrates the Business class's
+	// dependancy of the Staff class.
+
+	class Human{
+
+		protected $name;
+
+		public function __construct($name){
+
+			$this->name = $name;
+
+		}
+
+	}
+
+	class Business{
+
+		protected $staff;
+
+		// You can't create a business without staff, so make it a requirement. And also type hint it as Staff.
+		public function __construct(Staff $staff){
+
+			$this->staff = $staff;
+
+		}
+
+		public function getStaff(){
+
+			// Send a get message to the Staff object
+			return $this->staff->getMembers();
+
+		}
+
+		public function hire(Human $human){
+
+			// Send a message of add to the Staff object
+			$this->staff->add($human);
+
+		}
 
 
+	}
+
+	class Staff{
+
+		protected $members;
+
+		// Allow the option to pass in members, or default to an array
+		public function __construct($members = []){
+
+			$this->members = $members;
+
+		}
+
+		public function getMembers(){
+
+			return $this->members;
+
+		}
+
+		public function add(Human $human){
+
+			$this->members[] = $human;
+
+		}
+
+
+	}
+
+	$jeff = new Human('Jeffery Way');
+	$jane = new Human('Jane Doyle');
+
+	// Add jefferey way to staff
+	$staff = new Staff([$jeff]);
+
+	// create the laracasts business object, passing in staff.
+	$laracasts = new Business($staff);
+
+	// The business should be able to add humans to thier staff
+	$laracasts->hire($jane);
+
+	// create a getter to obtain the staff in the business
+	var_dump($laracasts->getStaff());
 
 
 });
