@@ -1,10 +1,18 @@
 <?php
 
 class UsersController extends BaseController{
+
+	protected $user;
+
+	public function __construct(User $user){
+
+		$this->user = $user;
+
+	}
 	
 	public function index(){
 
-		$users = User::all();
+		$users = $this->user->all();
 		
 		return View::make('users/index', ['users' => $users]);
 	
@@ -12,7 +20,7 @@ class UsersController extends BaseController{
 
 	public function show($username){
 
-		$user = User::whereUsername($username)->first();
+		$user = $this->user->whereUsername($username)->first();
 
 		return View::make('users/show')->with('user', $user);
 	}
@@ -26,20 +34,23 @@ class UsersController extends BaseController{
 	public function store(){
 
 		// if validation fails
-		if( ! User::isValid( Input::all() ) ){
+		$input = Input::all();
 
-			return Redirect::back()->withInput()->withErrors(User::$errors);
+		if( ! $this->user->fill($input)->isValid() ){
+
+			return Redirect::back()->withInput()->withErrors($this->user->$errors);
 
 		}
 
 		// return 'Store the user in DB';
 		// return Input::all();
 		// return Input::get('username');
-		$user = new User;
-		$user->username = Input::get('username');
-		$user->password = Hash::make(Input::get('password'));
+		// $user = new User;
+		// $user->username = Input::get('username');
+		// $user->password = Hash::make(Input::get('password'));
+		// $user->save();
 
-		$user->save();
+		$this->user->save();
 
 		return Redirect::route('users.index');
 		// same as

@@ -141,7 +141,7 @@ Route::get('/oop', function(){
 	// We create a sub class by extending another class. The protected funtions and properties in the base class will be available 
 	// in the sub class
 	abstract class Shape{
-		// This is now an abscrate class. I specify comon functionality here but I never want to be directly instanciated. You 
+		// This is now an abstract class. I specify comon functionality here but I never want to be directly instanciated. You 
 		// cant just have a generic shape object, you must use one of the sub classes i.e. Circle, Square or Traingle.
 		// We want to enforce the contract that every shape must have a getArea method. Now that it is an absract class an error
 		// will be thrown if we try and create a generic Shape, i.e. new Shape; Same principle for abstract methods, e.g. getArea
