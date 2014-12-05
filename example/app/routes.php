@@ -17,6 +17,18 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/files', 'PagesController@files');
 
+Route::resource('sessions', 'SessionsController');
+
+// an alias for create and delete, ('sessions/create' and DELETE  uris)
+Route::resource('login', 'SessionsController@create');
+Route::resource('logout', 'SessionsController@destroy');
+
+Route::get('/admin', function(){
+
+	return "Admin page";
+
+})->before('auth');
+
 // Resouceful routing for users section for a RESTful style of development. This is because we are accessing or manipulating a resourcre (Users).
 // REST allows us to think of our URIs in terms of nouns and collections
 // Route::get('/users', 'UsersController@index');

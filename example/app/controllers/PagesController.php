@@ -7,7 +7,8 @@ class PagesController extends BaseController{
 		// handy function to add a user to DB
 		// User::create([
 		//  	'username' => 'StevieG',
-		//  	'password' => Hash::make('password')
+		//  	'email' => 'cheeseontoast@gmail.com',
+		//  	'password' => Hash::make('changeme')
 		// ]);
 
 		$name = 'Ricahrd';
