@@ -17,6 +17,16 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/files', 'PagesController@files');
 
+Route::get('todo', 'TodoController@index');
+
+Route::get('todo/gettodos', 'TodoController@gettodos');
+Route::post('todo/gettodos', function(){
+
+	return Todo::create(Input::all());
+
+});
+
+
 Route::resource('sessions', 'SessionsController');
 
 // an alias for create and delete, ('sessions/create' and DELETE  uris)
