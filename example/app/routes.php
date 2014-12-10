@@ -26,6 +26,8 @@ Route::post('todo/gettodos', function(){
 
 });
 
+Route::get('tasks', 'TaskController@index');
+Route::get('tasks/{id}', 'TaskController@show')->where('id', '\d+');
 
 Route::resource('sessions', 'SessionsController');
 
