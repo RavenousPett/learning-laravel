@@ -42,4 +42,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	}
 
+	// Mutator function, follow convention below replacing Password with fieldname for this to be called before adding to DB
+	public function setPasswordAttribute($value){
+
+		$this->attributes['password'] = Hash::make($value);
+
+	}
+
+
+
 }

@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
-<title>Title of the document</title>
-</head>
+@extends('layouts/tasks')
 
-<body>
+@section('content')
 
 	<h1>All Tasks</h1>
+	<ul class="list-group">
 	@foreach($tasks as $task)
 
-		<li>{{ link_to( "tasks/$task->id", $task->title ) }}</li>
+		<li class="list-group-item">{{ link_to( "tasks/$task->id", $task->title ) }}</li>
 
 	@endforeach
+	</ul>
 
-</body>
-
-</html>
+@stop
