@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
+Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
 
 Route::get('/about', 'PagesController@about');
 
@@ -26,8 +26,38 @@ Route::post('todo/gettodos', function(){
 
 });
 
+
+//Tasks
 Route::get('tasks', 'TaskController@index');
 Route::get('tasks/{id}', 'TaskController@show')->where('id', '\d+');
+
+Route::get('{username}/tasks', function($username){
+
+//	Find username by user
+//	return User::where('username', '=', $username)->first();
+//	return User::where('username', $username)->first();
+	$user = User::whereUsername($username)->first();
+
+//	Find all task associated with that user
+//	return Task::whereUser_id($user->id)->first();
+	return $user->tasks;
+
+
+//	return Task::find(2)->user;
+
+});
+
+Route::get('{username}/tasks/{id}', function($username, $id){
+
+//	Find the task by its id
+	$user = User::whereUsername($username)->first();
+	$task = $user->tasks()->findOrFail($id);
+
+//	And load a view to display it
+	return View::make('tasks/show', compact('task'));
+
+});
+
 
 Route::resource('sessions', 'SessionsController');
 
