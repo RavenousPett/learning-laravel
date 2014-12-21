@@ -31,33 +31,61 @@ Route::post('todo/gettodos', function(){
 Route::get('tasks', 'TaskController@index');
 Route::get('tasks/{id}', 'TaskController@show')->where('id', '\d+');
 
-Route::get('{username}/tasks', function($username){
+Route::get('{username}/tasks', 'UserTasksController@index');
 
-//	Find username by user
-//	return User::where('username', '=', $username)->first();
-//	return User::where('username', $username)->first();
-	$user = User::whereUsername($username)->first();
+Route::get('{username}/tasks/{id}', ['as' => 'user.tasks.show', 'uses' => 'UserTasksController@show']);
 
-//	Find all task associated with that user
-//	return Task::whereUser_id($user->id)->first();
-	return $user->tasks;
-
-
-//	return Task::find(2)->user;
-
-});
-
-Route::get('{username}/tasks/{id}', function($username, $id){
-
-//	Find the task by its id
-	$user = User::with('tasks')->whereUsername($username)->first();
-	$task = $user->tasks;
-//	$task = $user->tasks()->findOrFail($id);
-
-//	And load a view to display it
-	return View::make('tasks/show', compact('user', 'task'));
-
-});
+//Route::get('{username}/tasks', function($username){
+//
+////	Find username by user
+////	return User::where('username', '=', $username)->first();
+////	return User::where('username', $username)->first();
+//	$user = User::whereUsername($username)->first();
+//
+////	Find all task associated with that user
+////	return Task::whereUser_id($user->id)->first();
+//	return $user->tasks;
+//
+//
+////	return Task::find(2)->user;
+//
+//});
+//
+//Route::get('{username}/tasks/{id}', function($username, $id){
+//
+//	ini_set('xdebug.var_display_max_depth', 5);
+//	ini_set('xdebug.var_display_max_children', 256);
+//	ini_set('xdebug.var_display_max_data', 1024);
+//
+////	Find the task by its id
+//	$user = User::with('tasks')->whereUsername($username)->first();
+//	$task = $user->tasks;
+//
+//	echo $user;
+//
+//	echo '<br /><br />';
+//
+//	echo $user->tasks;
+//
+//	echo '<br /><br />';
+//
+//	$properties = get_object_vars( $user->tasks );
+//
+//	print_r( $properties );
+//
+//	echo gettype($user->tasks);
+//
+//	die();
+//	dd($task);
+//
+////	return $task->title;
+//
+////	$task = $user->tasks()->findOrFail($id);
+//
+////	And load a view to display it
+//	return View::make('tasks/show', compact('user', 'task'));
+//
+//});
 
 
 Route::resource('sessions', 'SessionsController');
