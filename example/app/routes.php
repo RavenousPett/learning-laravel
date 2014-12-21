@@ -50,11 +50,12 @@ Route::get('{username}/tasks', function($username){
 Route::get('{username}/tasks/{id}', function($username, $id){
 
 //	Find the task by its id
-	$user = User::whereUsername($username)->first();
-	$task = $user->tasks()->findOrFail($id);
+	$user = User::with('tasks')->whereUsername($username)->first();
+	$task = $user->tasks;
+//	$task = $user->tasks()->findOrFail($id);
 
 //	And load a view to display it
-	return View::make('tasks/show', compact('task'));
+	return View::make('tasks/show', compact('user', 'task'));
 
 });
 
