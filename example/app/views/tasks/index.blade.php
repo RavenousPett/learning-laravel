@@ -16,4 +16,9 @@
 		@endforeach
 	</ul>
 
+@if(isset($users))
+	<hr>
+	@include('tasks/partials/_form')
+@endif
+
 @stop
