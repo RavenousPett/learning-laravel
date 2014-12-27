@@ -1,6 +1,16 @@
 <?php
 
+use Acme\Services\TaskCreatorService;
+
 class TaskController extends BaseController{
+
+	protected $taskCreator;
+
+	public function __construct(TaskCreatorService $taskCreator){
+
+		$this->taskCreator = $taskCreator;
+
+	}
 	
 	public function index(){
 
@@ -27,13 +37,23 @@ class TaskController extends BaseController{
 
 	public function store(){
 
-		$input = Input::all();
+//		$input = Input::all();
 
-		Task::create([
-			'title' => $input['title'],
-			'body' => $input['body'],
-			'user_id' => $input['assign']
-		]);
+		try{
+
+			$this->taskCreator->make($input = Input::all());
+
+		}catch (Acme\Validators\ValidationException $e){
+
+			return Redirect::back()->withInput()->withErrors($e->getErrors());
+
+		}
+
+//		Task::create([
+//			'title' => $input['title'],
+//			'body' => $input['body'],
+//			'user_id' => $input['assign']
+//		]);
 
 		return Redirect::route('tasks');
 
