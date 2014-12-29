@@ -6,6 +6,13 @@
 
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
+		<style>
+
+			.completed{ background: #8acc6e; }
+			#task-update-form{ position: absolute; top: 1em; right: 1em; }
+
+		</style>
+
 		<title>Title of the document</title>
 	</head>
 

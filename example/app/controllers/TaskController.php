@@ -5,7 +5,7 @@ class TaskController extends BaseController{
 	public function index(){
 
 		// fetch all tasks
-		$tasks = Task::with('user')->get();
+		$tasks = Task::with('user')->orderBy('created_at', 'desc')->get();
 		$users = User::lists('username', 'id');
 
 		// load a veiw to display them
@@ -61,6 +61,17 @@ class TaskController extends BaseController{
 //		]);
 
 		return Redirect::route('tasks');
+
+	}
+
+	public function update($id){
+
+		$task = Task::find($id);
+		$task->completed = Input::get('completed') ? Input::get('completed') : 0;
+		$task->save();
+
+		return Redirect::route('tasks');
+
 
 	}
 

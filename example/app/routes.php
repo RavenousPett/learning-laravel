@@ -31,6 +31,7 @@ Route::post('todo/gettodos', function(){
 Route::get('/tasks', array('as' => 'tasks', 'uses' => 'TaskController@index'));
 Route::get('tasks', 'TaskController@index');
 Route::get('tasks/{id}', 'TaskController@show')->where('id', '\d+');
+Route::patch('tasks/{id}', ['as' => 'tasks.update', 'uses' => 'TaskController@update']);
 
 Route::get('{username}/tasks', 'UserTasksController@index');
 
